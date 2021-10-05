@@ -25,5 +25,5 @@ from (
          from transactions t
                   left join earliest e on t.user_id = e.user_id
          where date_part('day', t.transaction_ts - e.earliest_order) * 24 +
-               DATE_PART('hour', t.transaction_ts - e.earliest_order) < 72
+               date_part('hour', t.transaction_ts - e.earliest_order) < 72
          group by t.user_id) no_of_orders;      
