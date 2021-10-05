@@ -1,3 +1,5 @@
+--(a)	Для каждого сотрудника найти его департамент, включая тех, у кого департамента нет
+
 select e.id   as id,
        e.name as name,
        (case
@@ -10,6 +12,9 @@ from employees e
          left join departments d on e.dep_id = d.id
 order by e.id;
 
+
+
+--(b)  Найти наибольшую зарплату по департаментам и отсортировать департаменты по убыванию максимальной зарплаты
 
 select (case
             when d.name is not null
