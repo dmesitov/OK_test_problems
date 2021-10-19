@@ -10,33 +10,32 @@ group by date
 
 --Найти всех пользователей, смотревших видео все дни в январе 2021
 
-select user_id,
-	      count(distinct date) as days_active_jan
+select user_id
 from videos
 where date_trunc(‘month’, date) = ‘2021-01-01’
 group by user_id
-having days_active_jan = 31
+having count(distinct date) = 31
 
 
 
 --Найти всех пользователей, смотревших video_id 1 и 3, но не смотревших video_id 2
 
-select user_id,
-       max(case
+select user_id
+
+from video
+group by user_id
+having max(case
                when video_id = 1
                    then 1
                else 0
-           end) as v1,
-       max(case
+    end) = 1
+   and max(case
                when video_id = 2
                    then 1
                else 0
-           end) as v2,
-       max(case
+    end) = 0
+   and max(case
                when video_id = 3
                    then 1
                else 0
-           end) as v3
-from videos
-group by user_id
-having v1 = 1 and v3 = 1 and v2 = 0
+    end) = 1
