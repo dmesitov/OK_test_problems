@@ -12,7 +12,7 @@ group by date
 
 select user_id
 from videos
-where date_trunc(‘month’, date) = ‘2021-01-01’
+where date_trunc('month', date) = '2021-01-01'
 group by user_id
 having count(distinct date) = 31
 
